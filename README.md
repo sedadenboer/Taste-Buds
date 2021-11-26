@@ -15,7 +15,8 @@ This application will make it possible for users to analyze their Spotify listen
 ### Main feature
 * Top tracks, artists, genres, (albums and podcasts). Time frame options are; all data, last year, last month, last week.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/minprog-platforms/project-sedadenboer/tree/master/doc/base_sketch.jpg?raw=true)
+
 
 ### Additional feature ideas
 * Add 30 second snippets of audio to the top tracks and artist when you click them (based on Thirtify app).
