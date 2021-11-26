@@ -30,11 +30,18 @@ This application will make it possible for users to analyze their Spotify listen
 [List any data sources that you will use and whether you will need to transform the data before it is usable for your application. The list should include links to where the data sources can be found (downloaded or accessed via API). If you need to have an account to access the data, make the account now. Often it proves to be harder than expected to access good data.]
 
 For this application I will use the Spotify API which provides endpoints that give access to a lot of information about user profiles, artists, tracks, albums, playlists, etc. For this a Spotify account with a premium subscription is required. When you want to use the Spotify API in a web app, authorization is also needed. Additional information about using the Spotify API can be found here: https://developer.spotify.com/documentation/web-api/ .
+Other useful data sources:
+* Spotify Web API: https://developer.spotify.com/documentation/web-api/reference/#/
+* Development guides - Authorization: https://developer.spotify.com/documentation/general/guides/authorization/
+* React JS Tutorial - 06 How to get data from Spotify (playlists example): https://www.youtube.com/watch?v=dGFUQf5pcpk
+
+
 
 ### External components
 [List the external components (libraries like sqlalchemy or bootstrap) that you need to implement certain features. Include the names, and if the component is not very standard, include a link to its website. Specify what part you need and what for.]
 
-For the layout and displaying the top lists it would probably be easiest to use bootstrap. Additionaly, for extra nice visuals animation frameworks like React Reveal can be used. This will only be implemented if there is enough time.
+For the layout and displaying the top lists it would probably be easiest to use bootstrap. Additionaly, for extra nice visuals animation frameworks like React Reveal can be used. This will only be implemented if there is enough time. For the Spotify API to work with React the react-spotify-api package will be used: https://www.npmjs.com/package/react-spotify-api . The following GitHub page also describes how to use the Spotify API with Node.js: https://github.com/thelinmichael/spotify-web-api-node (retrieved from https://developer.spotify.com/documentation/web-api/libraries/).
+
 
 ### Similar web apps
 [Include a review of similar web apps, in terms of features and technical aspects: what do they do? how have they implemented it? can you do it in the same way? (Spend a few lines per “competitor”.)]
