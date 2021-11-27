@@ -28,7 +28,7 @@ This application will make it possible for users to analyze their Spotify listen
 * Select genres and generate a custom playlist.
 * Generate playlist based on most popular song every month.
 
-Below are two sketches of a few ideas, more will be worked out if there is time.
+Below are two sketches of a few ideas, more will be worked out if there is enough time.
 
 ![App Screenshot](doc/additional_idea1.jpg)
 
