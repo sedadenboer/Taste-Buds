@@ -45,18 +45,21 @@ For the layout and displaying the top lists it would probably be easiest to use 
 
 #### Magic Playlist
 Link: https://magicplaylist.co/#/?_k=9b92jp, https://github.com/loverajoel/magicplaylist
+
 Function: Creates playlists based on a song.
 
 This app was build with React. This guy also used a Spotify-SDK: https://github.com/loverajoel/spotify-sdk . The full pseudocode algorithm is in his README.md (second GitHub link above), which can be very useful for creating a similar side feature in my app. 
 
 #### Discover Quickly
 Link: https://discoverquickly.com/
+
 Function: Enables the user to quickly scan through songs, by playing snippets of them, and save them.
 
 The nice thing about this app is that you can hear snippets of the song by hovering over the icons with your mouse. I could not find the GitHub repository for this app, but by inspecting the website it shows that the creators placed all the songs in a grid with class='playable'. I think it would be best to also use a grid and create a separate hover/click function to make songs playable.
 
 #### Replayify
 Link: https://replayify.com/app, https://github.com/palampinen/replayify
+
 Function: Tracks favourite artists and songs.
 
 This app was build with React as well and very similar to what I want to make. I think it's also nice that genres are displayed beneath the song. However, I'd like to add some more functionality to the app besides displaying the top tracks and artists. Clicking on songs leads to opening the song on Spotify and I think it would be nicer to have the 30 second snippet functionality instead of this. I would also like to have the user look at more different time frames besides all data, last year and last six months. 
