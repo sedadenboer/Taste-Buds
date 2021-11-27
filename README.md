@@ -74,4 +74,10 @@ This app was build with React as well and very similar to what I want to make. I
 
 
 ### Difficulties
-Figuring out the authorization, getting the actual data from Spotify (network request) by setting up a server, making hooks to get tokens, handling errors (e.g. rate limits). To overcome, these I will have to dive into these topics with the help of TA's. Since the Spotify API is very widely known there are also a lot of forum posts and tutorials for it available. Spotify itself also provides a very extensive guide on how to use their API and possible errors (like the rate limits) and what to do.
+* Figuring out the authorization.
+* Getting the actual data from Spotify (network request) by setting up a server.
+* Making hooks to get tokens.
+* Handling errors (e.g. rate limits).
+* Making complex additional features work, e.g. playing 30 seconds snippets of songs or creating a custom Spotify playlist.
+
+ To overcome, these I will have to dive into these topics with the help of TA's. Since the Spotify API is very widely known there are also a lot of forum posts and tutorials for it available. Spotify itself also provides a very extensive guide on how to use their API and possible errors (like the rate limits) and what to do.
