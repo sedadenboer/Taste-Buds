@@ -21,10 +21,18 @@ This application will make it possible for users to analyze their Spotify listen
 ### Additional feature ideas
 * Add 30 second snippets of audio to the top tracks and artist when you click them (based on Thirtify app).
 * Basic listening statistics and developments in listening behaviour, with regards to the categories mentioned above.
+* Mood analysis (happy, sad, ...).
+* Show favourite songs from all represented decades from your music.
 * Playlist genre analysis.
 * Save Discover Weekly.
 * Select genres and generate a custom playlist.
 * Generate playlist based on most popular song every month.
+
+Below are two sketches of a few ideas, more will be worked out if there is time.
+
+![App Screenshot](doc/additional_idea1.jpg)
+
+![App Screenshot](doc/additional_idea2.jpg)
 
 ## Prerequisits
 ### Data sources
