@@ -1,13 +1,13 @@
 
 
 # Project proposal: React App for Spotify users
-Seda den Boer
+By Seda den Boer
 
 ## Application goal summary
 Create a React App inspired by Spotify Wrapped.
 
 ## Problem statement
-Spotify is one of the most popular music streaming platforms. Every year users get their Spotify Wrapped, which shows them which artists, tracks and podcasts defined them that year. As music can be a great indicator of someone's personality, people often get excited to see and share their Spotify wrapped. However, music enthousiasts might want more insights and tools to analyze their listening habits all year long. 
+Spotify is one of the most popular music streaming platforms. Every year users get their Spotify Wrapped, which shows them which artists, tracks and podcasts defined them that year. As music can be a great indicator of someone's personality, people often get excited to see and share their Spotify Wrapped. However, music enthousiasts might want more insights and tools to analyze their listening habits all year long. 
 
 ## Solution sketch
 This application will make it possible for users to analyze their Spotify listening behaviour all year long. Ideas for possible features are:
