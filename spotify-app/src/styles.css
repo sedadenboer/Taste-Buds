@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@600&family=Roboto+Mono:wght@600&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: rgb(255, 188, 152);
+}
+
+.top {
+    font-family: 'Readex Pro', sans-serif;
+    color:hsl(208, 99%, 50%)
+}
+
+.h3 {
+    color:hsl(208, 99%, 50%);
+}
+
+.react-tabs {
+    -webkit-tap-highlight-color: transparent;
+    font-family: monospace;
+    font-size: 20px;
+  }
+  
+.react-tabs__tab-list {
+    border-bottom: 1px solid #aaa;
+    margin: 0 0 10px;
+    padding: 0;
+  }
+  
+.react-tabs__tab {
+    display: inline-block;
+    border: 1px solid transparent;
+    border-bottom: none;
+    bottom: -1px;
+    position: relative;
+    list-style: none;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
+.react-tabs__tab--selected {
+    background: rgb(255, 188, 152);
+    border-color: #aaa;
+    color: black;
+    border-radius: 5px 5px 0 0;
+  }
+  
+.react-tabs__tab--disabled {
+    color: GrayText;
+    cursor: default;
+  }
+  
+.react-tabs__tab:focus:after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    left: -4px;
+    right: -4px;
+    bottom: -5px;
+    background: #fff;
+  }
+  
+.react-tabs__tab-panel {
+    display: none;
+  }
+  
+.react-tabs__tab-panel--selected {
+    display: block;
+  }
