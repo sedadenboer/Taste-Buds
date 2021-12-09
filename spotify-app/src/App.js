@@ -72,6 +72,10 @@ function App() {
     <div className="App">
       <a href='http://localhost:8888' > Login to Spotify </a>
       <p>&nbsp;</p>
+      <div class='title'>Tastebuds</div>
+      <div class='subtitle'>Explore your Spotify listening behaviour</div>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
       <Tabs>
         <TabList>
           <Tab>Top Tracks</Tab>
