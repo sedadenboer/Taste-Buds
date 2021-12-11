@@ -6,6 +6,7 @@ import './styles.css';
 import TopTracksResult from './TopTracks';
 import TopArtistsResult from './TopArtists';
 import TopGenresResult from './TopGenres'
+import Summary from './Summary';
 import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotifyApi = new SpotifyWebApi();
@@ -18,7 +19,33 @@ function getHashParams() {
   while (e = r.exec(q)) {
     hashParams[e[1]] = decodeURIComponent(e[2]);
   }
-  return hashParams;
+  return hashParams
+}
+
+// https://stackoverflow.com/questions/47923791/merging-json-objects-with-same-key-together
+function mergeObjectValuesSameKey(object) {
+  const mergedArray = object.reduce((r, o) => {
+    Object.keys(o).forEach(k => {
+      r[k] = (r[k] || []).concat(o[k]);
+    })
+    return r
+  }, {})
+  return mergedArray
+}
+
+// https://stackoverflow.com/questions/34396767/sort-array-by-occurrence-of-its-elements
+function sortArrayByElementFrequency(array) {
+  // https://stackoverflow.com/questions/34396767/sort-array-by-occurrence-of-its-elements
+  const frequencyArray = array.reduce(function (obj, val) {
+    obj[val] = (obj[val] || 0) + 1
+    return obj
+  }, {})
+
+  const sortedFrequencyArray = Object.keys(frequencyArray).sort(function (a, b) {
+    return frequencyArray[b] - frequencyArray[a]
+  })
+
+  return sortedFrequencyArray
 }
 
 // https://www.youtube.com/watch?v=prayNyuN3w0&t=1064s
@@ -30,6 +57,9 @@ function App() {
   const [topTracks, setTopTracks] = useState([])
   const [topArtists, setTopArtists] = useState([])
   const [topGenres, setTopGenres] = useState([])
+  const [summaryTracks, setSummaryTracks] = useState([])
+  const [summaryArtists, setSummaryArtists] = useState([])
+  const [num1ArtistPhoto, setNum1ArtistPhoto] = useState('')
 
   useEffect(() => {
     if (!token) return
@@ -42,8 +72,7 @@ function App() {
     if (!topTracks) return setTopTracks([])
 
     spotifyApi.getMyTopTracks(topTracks).then(response => {
-      const keysList = Object.keys(response.items)
-      console.log(keysList.map((keysList) => Number(keysList) + 1))
+      console.log(response.items)
       setTopTracks(response.items.map(track => {
         return {
           artist: track.artists[0].name,
@@ -52,8 +81,16 @@ function App() {
           albumCover: track.album.images[1].url,
         }
       }))
+
+      // Select top 5 tracks for summary page
+      const summaryTrackNames = response.items.slice(0, 5).map(track => {
+        return { title: track.name }
+      })
+      const summaryTrackNamesArray = mergeObjectValuesSameKey(summaryTrackNames)
+      setSummaryTracks(summaryTrackNamesArray.title)
+
     })
-  }, [topTracks, token])
+  }, [topTracks, summaryTracks, token])
 
   // Get (recent) top artists
   useEffect(() => {
@@ -68,8 +105,19 @@ function App() {
           artistPhoto: artist.images[1].url
         }
       }))
+
+      // Select top 5 artists for summary
+      const summaryArtistNames = response.items.slice(0, 5).map(artist => {
+        return { name: artist.name }
+      })
+      const summaryArtistNamesArray = mergeObjectValuesSameKey(summaryArtistNames)
+      setSummaryArtists(summaryArtistNamesArray.name)
+
+      // Select artist photo of #1 artist for summary artist names
+      setNum1ArtistPhoto(response.items[0].images[1].url)
+
     })
-  }, [topArtists, token])
+  }, [topArtists, summaryArtists, num1ArtistPhoto, token])
 
   // Every artist contains a genre element
   useEffect(() => {
@@ -77,31 +125,14 @@ function App() {
     if (!topGenres) return setTopGenres([])
 
     spotifyApi.getMyTopArtists(topGenres).then(response => {
-      // console.log(response.items[0].genres)
       const genres = response.items.map(artist => {
         return {
           genres: artist.genres
         }
       })
 
-      // https://stackoverflow.com/questions/47923791/merging-json-objects-with-same-key-together
-      const completeGenresArray = genres.reduce((r, o) => {
-        Object.keys(o).forEach(k => {
-          r[k] = (r[k] || []).concat(o[k]);
-        })
-        return r
-      }, {})
-
-      // https://stackoverflow.com/questions/34396767/sort-array-by-occurrence-of-its-elements
-      const genreFrequency = completeGenresArray.genres.reduce(function (obj, val) {
-        obj[val] = (obj[val] || 0) + 1
-        return obj
-      }, {})
-
-      const sortedGenreFrequency = Object.keys(genreFrequency).sort(function (a, b) {
-        return genreFrequency[b] - genreFrequency[a]
-      })
-
+      const completeGenresArray = mergeObjectValuesSameKey(genres)
+      const sortedGenreFrequency = sortArrayByElementFrequency(completeGenresArray.genres)
       setTopGenres(sortedGenreFrequency)
     })
   }, [topGenres, token])
@@ -113,7 +144,7 @@ function App() {
       <div class='title'>Tastebuds</div>
       <div class='subtitle'>Explore your Spotify listening behaviour</div>
       <p>&nbsp;</p>
-      <p>&nbsp;</p>
+
       <Tabs>
         <TabList>
           <Tab>Top Tracks</Tab>
@@ -151,14 +182,20 @@ function App() {
         </TabPanel>
 
         <TabPanel>
-          {/* <p>&nbsp;</p> */}
           <TopGenresResult
             genreList={topGenres}
           />
+          <p>&nbsp;</p>
         </TabPanel>
 
         <TabPanel>
-
+          < Summary
+            tracks={summaryTracks}
+            artists={summaryArtists}
+            genreList={topGenres}
+            image={num1ArtistPhoto}
+            key={summaryTracks.uri}
+          />
         </TabPanel>
       </Tabs>
     </div>

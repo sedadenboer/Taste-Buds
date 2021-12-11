@@ -20,8 +20,13 @@ body {
     color: rgb(38, 6, 18);
 }
 
-.h1 {
-    color: red;
+/* div.summary {
+    text-align: left;
+} */
+
+.summary-subtitle {
+    font-size: 30px;
+    color: rgb(218, 53, 12);
 }
 
 audio {
