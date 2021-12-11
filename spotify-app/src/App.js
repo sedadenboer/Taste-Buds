@@ -42,7 +42,8 @@ function App() {
     if (!topTracks) return setTopTracks([])
 
     spotifyApi.getMyTopTracks(topTracks).then(response => {
-      console.log(response.items)
+      const keysList = Object.keys(response.items)
+      console.log(keysList.map((keysList) => Number(keysList) + 1))
       setTopTracks(response.items.map(track => {
         return {
           artist: track.artists[0].name,
@@ -127,9 +128,10 @@ function App() {
 
         <TabPanel>
           <Grid container justifyContent='center' alignItems='center' spacing={10} columns={4}>
-            {topTracks.map(track => (
-              <TopTracksResult
+            {topTracks.map((track, key) => (
+              < TopTracksResult
                 track={track}
+                ranking={Number(key) + 1}
                 key={track.uri}
               />
             ))}
@@ -138,9 +140,10 @@ function App() {
 
         <TabPanel>
           <Grid container justifyContent='center' alignItems='center' spacing={10} columns={4}>
-            {topArtists.map(artist => (
+            {topArtists.map((artist, key) => (
               <TopArtistsResult
                 artist={artist}
+                ranking={(Number(key) + 1)}
                 key={artist.uri}
               />
             ))}
@@ -148,10 +151,14 @@ function App() {
         </TabPanel>
 
         <TabPanel>
-          <p>&nbsp;</p>
+          {/* <p>&nbsp;</p> */}
           <TopGenresResult
             genreList={topGenres}
           />
+        </TabPanel>
+
+        <TabPanel>
+
         </TabPanel>
       </Tabs>
     </div>
