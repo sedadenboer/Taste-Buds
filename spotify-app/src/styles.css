@@ -20,13 +20,28 @@ body {
     color: rgb(38, 6, 18);
 }
 
-/* div.summary {
+.summary {
     text-align: left;
-} */
+    background: rgb(187, 173, 148);
+    display: inline-block;
+    width: 650px;
+    padding: 40px;
+    margin-top: -15px;
+    margin-bottom: 200px;
+}
 
 .summary-subtitle {
     font-size: 30px;
     color: rgb(218, 53, 12);
+}
+
+.summary-artists, .summary-tracks {
+    line-height: 2;
+}
+
+.summary-genres {
+    font-size: 26.4px;
+    line-height: 1.8;
 }
 
 audio {

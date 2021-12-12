@@ -1,32 +1,32 @@
 import React from "react";
+import { Grid } from "@material-ui/core";
 import './styles.css';
 
 export default function Summary({ tracks, artists, genreList, image }) {
     return (
         <div class='summary'>
-            <img src={image} alt='' />
-            <div class='summary-genres'>
-                <div class='summary-subtitle'>Top Genres</div>
-                <h2>{genreList[0]}</h2>
-                <h2>{genreList[1]}</h2>
-                <h2>{genreList[2]}</h2>
-            </div>
-            <p>&nbsp;</p>
-            <div class='summary-artists'>
-                <div class='summary-subtitle'>Top Artists</div>
-                {artists.map((artist, key) =>
-                    <h3>
-                        {key + 1}.&nbsp;{artist}
-                    </h3>)}
-            </div>
-            <p>&nbsp;</p>
-            <div class='summary-tracks'>
-                <div class='summary-subtitle'>Top Tracks</div>
-                {tracks.map((track, key) =>
-                    <h3>
-                        {key + 1}.&nbsp;{track}
-                    </h3>)}
-            </div>
-        </div >
+            <Grid container direction='row' justifyContent='center' spacing={10}>
+                <Grid item>
+                    <img src={image} alt='' />
+                    <div class='summary-genres'>
+                        <div class='summary-subtitle'>Top Genres</div>
+                        <div>{genreList[0]}</div>
+                        <div>{genreList[1]}</div>
+                        <div>{genreList[2]}</div>
+                    </div>
+                </Grid>
+                <Grid item>
+                    <div class='summary-artists'>
+                        <div class='summary-subtitle'>Top Artists</div>
+                        {artists.map(artist => <div>{artist}</div>)}
+                    </div>
+
+                    <div class='summary-tracks'>
+                        <div class='summary-subtitle'>Top Tracks</div>
+                        {tracks.map(track => <div>{track}</div>)}
+                    </div>
+                </Grid>
+            </Grid>
+        </div>
     )
 }
