@@ -13,7 +13,8 @@ Spotify is one of the most popular music streaming platforms. Every year users g
 This application will make it possible for users to analyze their Spotify listening behaviour all year long. Ideas for possible features are:
 
 ### Main feature
-* Top tracks, artists, genres, (albums and podcasts). Time frame options are; all data, last year, last month, last week.
+* Top tracks, artists, genres, (albums and podcasts). Time frame options are; all data, last year, last month, last week. 
+Update: the time range cannot be updated as it was planned, so now the most recent data is used as a default.
 
 ![App Screenshot](doc/base_sketch.jpg)
 
