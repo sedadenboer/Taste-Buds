@@ -54,6 +54,8 @@ function App() {
 
   const params = getHashParams();
   const token = params.access_token;
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [userProfile, setUserProfile] = useState([])
   const [topTracks, setTopTracks] = useState([])
   const [topArtists, setTopArtists] = useState([])
   const [topGenres, setTopGenres] = useState([])
@@ -61,9 +63,25 @@ function App() {
   const [summaryArtists, setSummaryArtists] = useState([])
   const [num1ArtistPhoto, setNum1ArtistPhoto] = useState('')
 
+  // Login if there is a access token
+  useEffect(() => {
+    if (token) {
+      spotifyApi.setAccessToken(token)
+      setLoggedIn(true)
+    }
+  }, [token, loggedIn])
+
+  // Get user profile
   useEffect(() => {
     if (!token) return
-    spotifyApi.setAccessToken(token)
+    if (!userProfile) return setUserProfile([])
+
+    spotifyApi.getMe().then(response => {
+      const userNameAndPhoto = [response.display_name, response.images[0].url]
+      setUserProfile(userNameAndPhoto)
+    }, err => {
+      console.error(err)
+    })
   }, [token])
 
   // Get (recent) top tracks
@@ -71,8 +89,7 @@ function App() {
     if (!token) return
     if (!topTracks) return setTopTracks([])
 
-    spotifyApi.getMyTopTracks(topTracks).then(response => {
-      console.log(response.items)
+    spotifyApi.getMyTopTracks({ limit: 30, time_range: 'short_term' }).then(response => {
       setTopTracks(response.items.map(track => {
         return {
           artist: track.artists[0].name,
@@ -88,17 +105,17 @@ function App() {
       })
       const summaryTrackNamesArray = mergeObjectValuesSameKey(summaryTrackNames)
       setSummaryTracks(summaryTrackNamesArray.title)
-
+    }, err => {
+      console.error(err)
     })
-  }, [topTracks, summaryTracks, token])
+  }, [token])
 
   // Get (recent) top artists
   useEffect(() => {
     if (!token) return
     if (!topArtists) return setTopArtists([])
 
-    spotifyApi.getMyTopArtists(topArtists).then(response => {
-      console.log(response.items)
+    spotifyApi.getMyTopArtists({ limit: 30, time_range: 'short_term' }).then(response => {
       setTopArtists(response.items.map(artist => {
         return {
           name: artist.name,
@@ -116,15 +133,18 @@ function App() {
       // Select artist photo of #1 artist for summary artist names
       setNum1ArtistPhoto(response.items[0].images[1].url)
 
+    }, err => {
+      console.error(err)
     })
-  }, [topArtists, summaryArtists, num1ArtistPhoto, token])
+  }, [token])
 
   // Every artist contains a genre element
   useEffect(() => {
     if (!token) return
     if (!topGenres) return setTopGenres([])
 
-    spotifyApi.getMyTopArtists(topGenres).then(response => {
+    spotifyApi.getMyTopArtists({ time_range: 'short_term' }).then(response => {
+      console.log(response.items)
       const genres = response.items.map(artist => {
         return {
           genres: artist.genres
@@ -134,71 +154,91 @@ function App() {
       const completeGenresArray = mergeObjectValuesSameKey(genres)
       const sortedGenreFrequency = sortArrayByElementFrequency(completeGenresArray.genres)
       setTopGenres(sortedGenreFrequency)
+    }, err => {
+      console.error(err)
     })
-  }, [topGenres, token])
+  }, [token])
 
   return (
     <div className="App">
-      <a href='http://localhost:8888' > Login to Spotify </a>
-      <p>&nbsp;</p>
-      <div class='title'>Tastebuds</div>
-      <div class='subtitle'>Explore your Spotify listening behaviour</div>
-      <p>&nbsp;</p>
+      {!loggedIn &&
+        <div>
+          <br></br>
+          <div class='title'>Tastebuds</div>
+          <div class='subtitle'>Explore your Spotify listening behaviour</div>
+          <br></br>
+          <br></br>
+          <p>Login to your Spotify account and get insights in your current music taste! </p>
+          <div className='login'>
+            <a href='http://localhost:8888'> Login to Spotify </a>
+          </div>
+        </div>}
 
-      <Tabs>
-        <TabList>
-          <Tab>Top Tracks</Tab>
-          <Tab>Top Artists</Tab>
-          <Tab>Top Genres</Tab>
-          <Tab>Summary</Tab>
-        </TabList>
-
-        {/* <p>&nbsp;</p>
-        <button>Recent</button> */}
-        <p>&nbsp;</p>
-
-        <TabPanel>
-          <Grid container justifyContent='center' alignItems='center' spacing={10} columns={4}>
-            {topTracks.map((track, key) => (
-              < TopTracksResult
-                track={track}
-                ranking={Number(key) + 1}
-                key={track.uri}
-              />
-            ))}
-          </Grid>
-        </TabPanel>
-
-        <TabPanel>
-          <Grid container justifyContent='center' alignItems='center' spacing={10} columns={4}>
-            {topArtists.map((artist, key) => (
-              <TopArtistsResult
-                artist={artist}
-                ranking={(Number(key) + 1)}
-                key={artist.uri}
-              />
-            ))}
-          </Grid>
-        </TabPanel>
-
-        <TabPanel>
-          <TopGenresResult
-            genreList={topGenres}
-          />
+      {loggedIn &&
+        <div class='loggedin-page'>
+          <div class='user-details'>
+            <img id='user-photo' src={userProfile[1]} alt='' />
+            <div>Welcome, {userProfile[0]}!</div>
+          </div>
+          <div class='title'>Tastebuds</div>
+          <div class='subtitle'>Explore your Spotify listening behaviour</div>
           <p>&nbsp;</p>
-        </TabPanel>
 
-        <TabPanel>
-          < Summary
-            tracks={summaryTracks}
-            artists={summaryArtists}
-            genreList={topGenres}
-            image={num1ArtistPhoto}
-            key={summaryTracks.uri}
-          />
-        </TabPanel>
-      </Tabs>
-    </div>
+          <Tabs>
+            <TabList>
+              <Tab>Top Tracks</Tab>
+              <Tab>Top Artists</Tab>
+              <Tab>Top Genres</Tab>
+              <Tab>Summary</Tab>
+            </TabList>
+
+            <p>&nbsp;</p>
+
+            <TabPanel>
+              <Grid container justifyContent='center' alignItems='center' spacing={5} columns={4}>
+                {topTracks.map((track, key) => (
+                  < TopTracksResult
+                    track={track}
+                    ranking={Number(key) + 1}
+                    key={track.uri}
+                  />
+                ))}
+              </Grid>
+            </TabPanel>
+
+            <TabPanel>
+              <Grid container justifyContent='center' alignItems='center' spacing={10} columns={4}>
+                {topArtists.map((artist, key) => (
+                  <TopArtistsResult
+                    artist={artist}
+                    ranking={(Number(key) + 1)}
+                    key={artist.uri}
+                  />
+                ))}
+              </Grid>
+            </TabPanel>
+
+            <TabPanel>
+              <TopGenresResult
+                genreList={topGenres}
+              />
+              <p>&nbsp;</p>
+            </TabPanel>
+
+            <TabPanel>
+              < Summary
+                tracks={summaryTracks}
+                artists={summaryArtists}
+                genreList={topGenres}
+                image={num1ArtistPhoto}
+                key={summaryTracks.uri}
+              />
+            </TabPanel>
+          </Tabs>
+        </div>
+      }
+    </div >
+
   )
 }
 

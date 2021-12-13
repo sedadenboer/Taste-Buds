@@ -4,10 +4,10 @@ import './styles.css';
 
 export default function TopTracksResult({ track, ranking }) {
     return (
-        <Grid item>
+        <Grid item >
             <img src={track.albumCover} alt='' />
             <div class='top-tracks'>
-                <div>
+                <div class='textbox-track'>
                     <h3>
                         {ranking}.
                         &nbsp;

@@ -3,7 +3,22 @@
 body {
     padding: 0;
     margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
     background-color: rgb(255, 188, 152);
+}
+
+/* .content {
+    background-color: rgb(255, 188, 152);
+    position:absolute;
+    left:0;
+    right:0;
+} */
+
+.login {
+    position: relative;
+    left: 0px;
+    top: 30px;
 }
 
 .title {
@@ -20,11 +35,44 @@ body {
     color: rgb(38, 6, 18);
 }
 
+.user-details {
+    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    left: 450px;
+    top: 130px;
+    line-height: 2;
+}
+
+#user-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+a:link, a:visited {
+    display: inline-block;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    color: rgb(255, 188, 152);
+    background-color: rgb(17, 66, 19);
+    padding: 14px 25px;
+    border-radius: 25px;
+}
+
+a:hover {
+    background-color:rgb(62, 97, 75);
+}
+
 .summary {
     text-align: left;
     background: rgb(187, 173, 148);
     display: inline-block;
-    width: 650px;
+    /* width: 650px; */
     padding: 40px;
     margin-top: -15px;
     margin-bottom: 200px;
