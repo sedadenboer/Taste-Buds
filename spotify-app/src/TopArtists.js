@@ -5,13 +5,13 @@ import './styles.css';
 export default function TopArtistsResult({ artist, ranking }) {
     return (
         <Grid item>
-            <img src={artist.artistPhoto} alt='' />
-            <div class='top-artists'>
-                <h3>
+            <div class='card-artist'>
+                <img src={artist.artistPhoto} alt='' />
+                <div class='card__body'>
                     {ranking}.
                     &nbsp;
                     {artist.name}
-                </h3>
+                </div>
             </div>
         </Grid>
     )

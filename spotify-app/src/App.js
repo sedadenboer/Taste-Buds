@@ -195,7 +195,7 @@ function App() {
             <p>&nbsp;</p>
 
             <TabPanel>
-              <Grid container justifyContent='center' alignItems='center' spacing={5} columns={4}>
+              <Grid container justifyContent='center' alignItems='center' spacing={8} columns={4}>
                 {topTracks.map((track, key) => (
                   < TopTracksResult
                     track={track}
@@ -207,7 +207,7 @@ function App() {
             </TabPanel>
 
             <TabPanel>
-              <Grid container justifyContent='center' alignItems='center' spacing={10} columns={4}>
+              <Grid container justifyContent='center' alignItems='center' spacing={8} columns={4}>
                 {topArtists.map((artist, key) => (
                   <TopArtistsResult
                     artist={artist}

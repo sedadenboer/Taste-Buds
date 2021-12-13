@@ -15,6 +15,11 @@ body {
     right:0;
 } */
 
+/* .container {
+    display: flex;
+    justify-content: center;
+} */
+
 .login {
     position: relative;
     left: 0px;
@@ -93,12 +98,12 @@ a:hover {
 }
 
 audio {
-    width: 250px;
+    width: 280px;
     height: 50px;
 }
 
 audio::-webkit-media-controls-panel {
-    background-color: rgb(250, 224, 211);
+    background-color: white;
 }
 
 .react-tabs {
@@ -143,3 +148,42 @@ audio::-webkit-media-controls-panel {
 .react-tabs__tab-panel--selected {
     display: block;
 }
+
+/* https://stackoverflow.com/questions/52669681/align-card-buttons-on-bottom-material-ui */
+.card-track {
+    padding: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .13);
+    background: white;
+    border-radius: 5px;
+    font-family: 'Readex Pro', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 300px;
+  }
+
+  .card-artist {
+    padding: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .13);
+    background: white;
+    border-radius: 5px;
+    font-family: 'Readex Pro', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 300px;
+  }
+  
+  .card__body {
+    display: flex;
+    flex: 1 0 auto;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .card__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
