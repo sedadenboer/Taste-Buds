@@ -2,7 +2,7 @@
 
 body {
     padding: 0;
-    margin: 0;
+    margin-bottom: 100px;
     max-width: 100%;
     overflow-x: hidden;
     background-color: rgb(255, 188, 152);
@@ -35,7 +35,7 @@ body {
 
 .subtitle {
     font-family: 'Lato', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: rgb(38, 6, 18);
 }
@@ -71,30 +71,6 @@ a:link, a:visited {
 
 a:hover {
     background-color:rgb(62, 97, 75);
-}
-
-.summary {
-    text-align: left;
-    background: rgb(187, 173, 148);
-    display: inline-block;
-    /* width: 650px; */
-    padding: 40px;
-    margin-top: -15px;
-    margin-bottom: 200px;
-}
-
-.summary-subtitle {
-    font-size: 30px;
-    color: rgb(218, 53, 12);
-}
-
-.summary-artists, .summary-tracks {
-    line-height: 2;
-}
-
-.summary-genres {
-    font-size: 26.4px;
-    line-height: 1.8;
 }
 
 audio {
@@ -162,7 +138,7 @@ audio::-webkit-media-controls-panel {
     width: 300px;
   }
 
-  .card-artist {
+.card-artist {
     padding: 10px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .13);
     background: white;
@@ -173,17 +149,77 @@ audio::-webkit-media-controls-panel {
     height: 400px;
     width: 300px;
   }
-  
-  .card__body {
+
+.card__body {
     display: flex;
     flex: 1 0 auto;
     align-items: flex-end;
     justify-content: center;
   }
-  
-  .card__actions {
+
+.card__body-artist {
+    align-items: stretch;
+    margin-top: 35px;
+  }
+
+.card__image {
+    height: 300px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.card__actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 16px;
   }
+
+.card-summary {
+    padding: 10px;
+    background: rgb(131, 130, 115);
+    font-family: 'Readex Pro', sans-serif;
+    margin: auto;
+    height: 550px;
+    width: 745px;
+    position: relative;
+}
+
+.card__image-summary {
+    display: block;
+    position: sticky;
+    overflow: auto;
+    right: 200px;
+    width: 300px;
+    margin: 10px;
+}
+
+.card__body-summary {
+    text-align: left;
+    display: inline-block;
+    position: absolute;
+    margin: 15px;
+    width: 340px;
+}
+
+#artistsSum {
+    line-height: 1.8;
+    top: 0px;
+}
+
+#tracksSum {
+    line-height: 1.8;
+    top: 260px;
+}
+
+#genresSum {
+    line-height: 1.7;
+    font-size: 30px;
+    left: 10px;
+}
+
+.summary-subtitle {
+    font-size: 34px;
+    color: rgb(218, 53, 12);
+    margin-top: 3px;
+}

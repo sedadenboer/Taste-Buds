@@ -1,12 +1,12 @@
 import React from "react";
-import { Grid, Card, CardMedia, CardContent, Typography, Box } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import './styles.css';
 
 export default function TopTracksResult({ track, ranking }) {
     return (
         <Grid item>
             <div class='card-track'>
-                <img src={track.albumCover} alt='' />
+                <img src={track.albumCover} class='card__image' alt='' />
                 <div class='card__body'>
                     {ranking}.
                     &nbsp;

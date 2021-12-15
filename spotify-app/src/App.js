@@ -163,9 +163,8 @@ function App() {
     <div className="App">
       {!loggedIn &&
         <div>
-          <br></br>
           <div class='title'>Tastebuds</div>
-          <div class='subtitle'>Explore your Spotify listening behaviour</div>
+          <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
           <br></br>
           <br></br>
           <p>Login to your Spotify account and get insights in your current music taste! </p>
@@ -181,7 +180,7 @@ function App() {
             <div>Welcome, {userProfile[0]}!</div>
           </div>
           <div class='title'>Tastebuds</div>
-          <div class='subtitle'>Explore your Spotify listening behaviour</div>
+          <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
           <p>&nbsp;</p>
 
           <Tabs>
