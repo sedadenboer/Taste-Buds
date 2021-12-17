@@ -36,7 +36,7 @@ body {
     top: 60px;
 }
 
-a:link, a:visited {
+a.login:link, a.login:visited {
     display: inline-block;
     -webkit-appearance: button;
     -moz-appearance: button;
@@ -50,7 +50,7 @@ a:link, a:visited {
     border-radius: 25px;
 }
 
-a:hover {
+a.login:hover {
     background-color:rgb(62, 97, 75);
 }
 
@@ -70,7 +70,7 @@ a:hover {
     top: 110px;
 }
 
-/* Styling for logged in user pictogram */
+/* Styling for logged in user pictogram and logout*/
 .user-details {
     font-size: 12px;
     font-family: 'Lato', sans-serif;
@@ -84,6 +84,14 @@ a:hover {
     width: 60px;
     height: 60px;
     border-radius: 50%;
+}
+
+a.logout, a.logout:visited, a.logout:active {
+    color: inherit;
+  }
+
+a.logout:hover {
+    color: rgb(62, 97, 75);
 }
 
 /* Styling for tabs */

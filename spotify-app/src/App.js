@@ -190,7 +190,7 @@ function App() {
           <br></br>
           <p id='welcome'>Login to your Spotify account and get insights in your current music taste! </p>
           <div className='login-button'>
-            <a href='http://localhost:8888'> Login to Spotify </a>
+            <a class='login' href='http://localhost:8888'> Login to Spotify </a>
           </div>
           <p id='author'>Made by Seda den Boer</p>
         </div>}
@@ -200,6 +200,7 @@ function App() {
           <div class='user-details'>
             <img id='user-photo' src={userProfile[1]} alt='' />
             <div>Welcome, {userProfile[0]}!</div>
+            <a class='logout' href='http://localhost:3000'> Logout </a>
           </div>
           <div class='title'>Tastebuds</div>
           <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
