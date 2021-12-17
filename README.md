@@ -1,5 +1,3 @@
-
-
 # Project proposal: React App for Spotify users
 By Seda den Boer
 

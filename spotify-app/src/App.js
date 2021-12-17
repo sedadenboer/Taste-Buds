@@ -194,7 +194,6 @@ function App() {
           </div>
           <p id='author'>Made by Seda den Boer</p>
         </div>}
-
       {/* When the user is logged in */}
       {loggedIn &&
         <div class='loggedin-page'>
