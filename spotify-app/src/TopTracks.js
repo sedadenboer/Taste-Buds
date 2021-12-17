@@ -20,21 +20,6 @@ export default function TopTracksResult({ track, ranking }) {
                         <source src={track.preview} type="audio/mpeg" />
                     </audio>
                 </div>
-
-                {/* <div class='top-tracks'>
-                        <div class='textbox-track'>
-                            <h3>
-                                {ranking}.
-                                &nbsp;
-                                {track.title}
-                            </h3>
-                        </div>
-                        <div>{track.artist}</div>
-                        <p></p>
-                        <audio controls="audio_play">
-                            <source src={track.preview} type="audio/mpeg" />
-                        </audio>
-                    </div> */}
             </div>
         </Grid >
     )

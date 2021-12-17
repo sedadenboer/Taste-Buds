@@ -1,29 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Lato&family=Lexend+Mega&family=PT+Mono&family=Readex+Pro:wght@600&family=Roboto+Mono:wght@600&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Readex+Pro:wght@600&display=swap');
 
 body {
+    text-align: center;
     padding: 0;
     margin-bottom: 100px;
     max-width: 100%;
     overflow-x: hidden;
     background-color: rgb(255, 188, 152);
-}
-
-/* .content {
-    background-color: rgb(255, 188, 152);
-    position:absolute;
-    left:0;
-    right:0;
-} */
-
-/* .container {
-    display: flex;
-    justify-content: center;
-} */
-
-.login {
-    position: relative;
-    left: 0px;
-    top: 30px;
 }
 
 .title {
@@ -40,19 +23,17 @@ body {
     color: rgb(38, 6, 18);
 }
 
-.user-details {
-    font-size: 12px;
+/* Styling for login page */
+.login-page {
+    margin-top: 50px;
+    text-align: center;
     font-family: 'Lato', sans-serif;
-    position: relative;
-    left: 450px;
-    top: 130px;
-    line-height: 2;
 }
 
-#user-photo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+.login-button {
+    position: relative;
+    left: 0px;
+    top: 60px;
 }
 
 a:link, a:visited {
@@ -73,15 +54,39 @@ a:hover {
     background-color:rgb(62, 97, 75);
 }
 
-audio {
-    width: 280px;
-    height: 50px;
+/* Welcome message and author styling */
+#welcome {
+    position: relative;
+    left: 0px;
+    top: 20px;
+    color: rgb(57, 104, 75);
+    font-size: 24px;
+    font-family: 'Readex Pro', sans-serif;
 }
 
-audio::-webkit-media-controls-panel {
-    background-color: white;
+#author {
+    position: relative;
+    left: 0px;
+    top: 110px;
 }
 
+/* Styling for logged in user pictogram */
+.user-details {
+    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    left: 450px;
+    top: 130px;
+    line-height: 2;
+}
+
+#user-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+/* Styling for tabs */
 .react-tabs {
     -webkit-tap-highlight-color: transparent;
     font-family: 'Readex Pro', sans-serif;
@@ -112,11 +117,6 @@ audio::-webkit-media-controls-panel {
     border-color: rgb(179, 172, 167);
 }
   
-.react-tabs__tab--disabled {
-    color: GrayText;
-    cursor: default;
-}
-  
 .react-tabs__tab-panel {
     display: none;
 }
@@ -125,42 +125,24 @@ audio::-webkit-media-controls-panel {
     display: block;
 }
 
-/* https://stackoverflow.com/questions/52669681/align-card-buttons-on-bottom-material-ui */
-.card-track {
-    padding: 10px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .13);
-    background: white;
-    border-radius: 5px;
-    font-family: 'Readex Pro', sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 500px;
-    width: 300px;
-  }
+/* Styling for audio player on Top Tracks page */
+audio {
+    width: 280px;
+    height: 50px;
+}
 
-.card-artist {
-    padding: 10px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .13);
-    background: white;
-    border-radius: 5px;
-    font-family: 'Readex Pro', sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 400px;
-    width: 300px;
-  }
+audio::-webkit-media-controls-panel {
+    background-color: white;
+}
 
+/* General card displayal for top items, layout inspiration from:
+https://stackoverflow.com/questions/52669681/align-card-buttons-on-bottom-material-ui */
 .card__body {
     display: flex;
     flex: 1 0 auto;
     align-items: flex-end;
     justify-content: center;
-  }
-
-.card__body-artist {
-    align-items: stretch;
-    margin-top: 35px;
-  }
+}
 
 .card__image {
     height: 300px;
@@ -173,14 +155,46 @@ audio::-webkit-media-controls-panel {
     align-items: center;
     justify-content: space-between;
     margin-top: 16px;
-  }
+}
 
+/* Top tracks card design */
+.card-track {
+    padding: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .13);
+    background: white;
+    border-radius: 5px;
+    font-family: 'Readex Pro', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 300px;
+}
+
+/* Top artists card design */
+.card-artist {
+    padding: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .13);
+    background: white;
+    border-radius: 5px;
+    font-family: 'Readex Pro', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 300px;
+}
+
+.card__body-artist {
+    align-items: stretch;
+    margin-top: 35px;
+}
+
+/* Card design for summary tab */
 .card-summary {
     padding: 10px;
     background: rgb(131, 130, 115);
     font-family: 'Readex Pro', sans-serif;
     margin: auto;
-    height: 550px;
+    height: 555px;
     width: 745px;
     position: relative;
 }
@@ -192,6 +206,7 @@ audio::-webkit-media-controls-panel {
     right: 200px;
     width: 300px;
     margin: 10px;
+    margin-bottom: 0px;
 }
 
 .card__body-summary {
@@ -200,6 +215,13 @@ audio::-webkit-media-controls-panel {
     position: absolute;
     margin: 15px;
     width: 340px;
+    font-size: 22px;
+}
+
+.summary-subtitle {
+    font-size: 34px;
+    color: rgb(218, 53, 12);
+    margin-top: 3px;
 }
 
 #artistsSum {
@@ -209,17 +231,11 @@ audio::-webkit-media-controls-panel {
 
 #tracksSum {
     line-height: 1.8;
-    top: 260px;
+    top: 266px;
 }
 
 #genresSum {
     line-height: 1.7;
     font-size: 30px;
     left: 10px;
-}
-
-.summary-subtitle {
-    font-size: 34px;
-    color: rgb(218, 53, 12);
-    margin-top: 3px;
 }

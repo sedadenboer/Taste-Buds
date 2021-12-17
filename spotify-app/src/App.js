@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Grid } from "@material-ui/core";
-import './App.css';
 import './styles.css';
 import TopTracksResult from './TopTracks';
 import TopArtistsResult from './TopArtists';
@@ -11,6 +10,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotifyApi = new SpotifyWebApi();
 
+// Premade function from Spotify API authorization code to retrieve a hash parameter
 function getHashParams() {
   var hashParams = {};
   var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -22,20 +22,21 @@ function getHashParams() {
   return hashParams
 }
 
-// https://stackoverflow.com/questions/47923791/merging-json-objects-with-same-key-together
-function mergeObjectValuesSameKey(object) {
-  const mergedArray = object.reduce((r, o) => {
-    Object.keys(o).forEach(k => {
-      r[k] = (r[k] || []).concat(o[k]);
+// Merges JSON object values of the same key into an object that holds this key and an array of combined values
+// Source: https://stackoverflow.com/questions/47923791/merging-json-objects-with-same-key-together
+function mergeObjectValuesSameKey(dataArray) {
+  const mergedObject = dataArray.reduce((r, object) => {
+    Object.keys(object).forEach(element => {
+      r[element] = (r[element] || []).concat(object[element]);
     })
     return r
   }, {})
-  return mergedArray
+  return mergedObject
 }
 
-// https://stackoverflow.com/questions/34396767/sort-array-by-occurrence-of-its-elements
+// Sorts an array based on element frequency
+// Source: https://stackoverflow.com/questions/34396767/sort-array-by-occurrence-of-its-elements
 function sortArrayByElementFrequency(array) {
-  // https://stackoverflow.com/questions/34396767/sort-array-by-occurrence-of-its-elements
   const frequencyArray = array.reduce(function (obj, val) {
     obj[val] = (obj[val] || 0) + 1
     return obj
@@ -48,10 +49,8 @@ function sortArrayByElementFrequency(array) {
   return sortedFrequencyArray
 }
 
-// https://www.youtube.com/watch?v=prayNyuN3w0&t=1064s
-// https://www.youtube.com/watch?v=Xcet6msf3eE&t=2482s
+// The build of this app was inspired by the following video: https://www.youtube.com/watch?v=Xcet6msf3eE&t=2482s
 function App() {
-
   const params = getHashParams();
   const token = params.access_token;
   const [loggedIn, setLoggedIn] = useState(false)
@@ -63,7 +62,7 @@ function App() {
   const [summaryArtists, setSummaryArtists] = useState([])
   const [num1ArtistPhoto, setNum1ArtistPhoto] = useState('')
 
-  // Login if there is a access token
+  // Login if there is an access token
   useEffect(() => {
     if (token) {
       spotifyApi.setAccessToken(token)
@@ -76,12 +75,16 @@ function App() {
     if (!token) return
     if (!userProfile) return setUserProfile([])
 
+    // Retrieve user profile details
     spotifyApi.getMe().then(response => {
+      // Get username and profile picture and update userProfile state
       const userNameAndPhoto = [response.display_name, response.images[0].url]
       setUserProfile(userNameAndPhoto)
     }, err => {
       console.error(err)
     })
+    // the following and other Hook useEffect dependency errors can be ignored to prevent too many server requests
+    // eslint-disable-next-line 
   }, [token])
 
   // Get (recent) top tracks
@@ -89,7 +92,9 @@ function App() {
     if (!token) return
     if (!topTracks) return setTopTracks([])
 
+    // Retrieve user top tracks data (first 30 items, short term data)
     spotifyApi.getMyTopTracks({ limit: 30, time_range: 'short_term' }).then(response => {
+      // Return wanted data for every track and update topTracks state
       setTopTracks(response.items.map(track => {
         return {
           artist: track.artists[0].name,
@@ -99,15 +104,19 @@ function App() {
         }
       }))
 
-      // Select top 5 tracks for summary page
+      // Select top 5 tracks for summary page 
       const summaryTrackNames = response.items.slice(0, 5).map(track => {
+        // Returns array with objects containing the same key 'title'
         return { title: track.name }
       })
+      // Add values of these objects to an array and update summaryTracks state
       const summaryTrackNamesArray = mergeObjectValuesSameKey(summaryTrackNames)
       setSummaryTracks(summaryTrackNamesArray.title)
+
     }, err => {
       console.error(err)
     })
+    // eslint-disable-next-line
   }, [token])
 
   // Get (recent) top artists
@@ -115,7 +124,9 @@ function App() {
     if (!token) return
     if (!topArtists) return setTopArtists([])
 
+    // Retrieve user top artists data (first 30 items, short term data)
     spotifyApi.getMyTopArtists({ limit: 30, time_range: 'short_term' }).then(response => {
+      // Return wanted data for every track and update topArtists state
       setTopArtists(response.items.map(artist => {
         return {
           name: artist.name,
@@ -123,10 +134,12 @@ function App() {
         }
       }))
 
-      // Select top 5 artists for summary
+      // Select top 5 artists for summary page
       const summaryArtistNames = response.items.slice(0, 5).map(artist => {
+        // Returns array with objects containing the same key 'name'
         return { name: artist.name }
       })
+      // Add values of these objects to an array and update summaryArtists state
       const summaryArtistNamesArray = mergeObjectValuesSameKey(summaryArtistNames)
       setSummaryArtists(summaryArtistNamesArray.name)
 
@@ -136,6 +149,7 @@ function App() {
     }, err => {
       console.error(err)
     })
+    // eslint-disable-next-line
   }, [token])
 
   // Every artist contains a genre element
@@ -143,36 +157,45 @@ function App() {
     if (!token) return
     if (!topGenres) return setTopGenres([])
 
+    // Retrieve user top artists data (short term data)
     spotifyApi.getMyTopArtists({ time_range: 'short_term' }).then(response => {
-      console.log(response.items)
+      // Save genres element of all artists
       const genres = response.items.map(artist => {
+        // Returns an array with objects containing the same 'artistGenres' key and an array of genres as value
         return {
-          genres: artist.genres
+          artistGenres: artist.genres
         }
       })
 
-      const completeGenresArray = mergeObjectValuesSameKey(genres)
-      const sortedGenreFrequency = sortArrayByElementFrequency(completeGenresArray.genres)
+      // Add all genres into one array and recreate new object with it
+      const completeGenresObject = mergeObjectValuesSameKey(genres)
+      // Take the array of genres, sort it based on genre frequency abd update topGenres state
+      const sortedGenreFrequency = sortArrayByElementFrequency(completeGenresObject.artistGenres)
       setTopGenres(sortedGenreFrequency)
+
     }, err => {
       console.error(err)
     })
+    // eslint-disable-next-line
   }, [token])
 
   return (
     <div className="App">
+      {/* Login page */}
       {!loggedIn &&
-        <div>
+        <div class='login-page'>
           <div class='title'>Tastebuds</div>
           <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
           <br></br>
           <br></br>
-          <p>Login to your Spotify account and get insights in your current music taste! </p>
-          <div className='login'>
+          <p id='welcome'>Login to your Spotify account and get insights in your current music taste! </p>
+          <div className='login-button'>
             <a href='http://localhost:8888'> Login to Spotify </a>
           </div>
+          <p id='author'>Made by Seda den Boer</p>
         </div>}
 
+      {/* When the user is logged in */}
       {loggedIn &&
         <div class='loggedin-page'>
           <div class='user-details'>
@@ -181,18 +204,19 @@ function App() {
           </div>
           <div class='title'>Tastebuds</div>
           <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
-          <p>&nbsp;</p>
-
+          <br></br>
+          <br></br>
           <Tabs>
+            {/* Displayal of tab row */}
             <TabList>
               <Tab>Top Tracks</Tab>
               <Tab>Top Artists</Tab>
               <Tab>Top Genres</Tab>
               <Tab>Summary</Tab>
             </TabList>
-
-            <p>&nbsp;</p>
-
+            <br></br>
+            <br></br>
+            {/* Top Tracks page */}
             <TabPanel>
               <Grid container justifyContent='center' alignItems='center' spacing={8} columns={4}>
                 {topTracks.map((track, key) => (
@@ -204,7 +228,7 @@ function App() {
                 ))}
               </Grid>
             </TabPanel>
-
+            {/* Top Artists page */}
             <TabPanel>
               <Grid container justifyContent='center' alignItems='center' spacing={8} columns={4}>
                 {topArtists.map((artist, key) => (
@@ -216,14 +240,13 @@ function App() {
                 ))}
               </Grid>
             </TabPanel>
-
+            {/* Top Genres page */}
             <TabPanel>
               <TopGenresResult
                 genreList={topGenres}
               />
-              <p>&nbsp;</p>
             </TabPanel>
-
+            {/* Summary page */}
             <TabPanel>
               < Summary
                 tracks={summaryTracks}
@@ -234,10 +257,8 @@ function App() {
               />
             </TabPanel>
           </Tabs>
-        </div>
-      }
+        </div>}
     </div >
-
   )
 }
 
