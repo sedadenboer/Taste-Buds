@@ -12,17 +12,18 @@ Currently the app is not launched or available to the public since it requires a
 For now http//localhost:8888/callback is used as the redirect uri while running the app locally. For the authorization server and start client, npm dependencies need to be installed (`npm install`), as well as an up-to-date version of Node.js: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm.
 
 ## Screenshots
+![App Screenshot](doc/tastebuds_login.png)
+![App Screenshot](doc/tastebuds_tracks.png)
+![App Screenshot](doc/tastebuds_artists.png)
+![App Screenshot](doc/tastebuds_genres.png)
+![App Screenshot](doc/tastebuds_summary.png)
 
-![App Screenshot](doc/base_sketch.jpg)
-
-## Acknowledgements
 ## Acknowledgements
 - [Spotify Web API Development Guides](https://developer.spotify.com/documentation/web-api/quick-start/) + [Spotify Web API Tutorial](https://developer.spotify.com/documentation/web-api/quick-start/): Authorization guides and API usage guides by Spotify.
  - [Spotify Accounts Authentication Examples](https://github.com/spotify/web-api-auth-examples): a repository containing source code for setting up a Node.js based server with OAuth 2.0 flows for Spotify Web API authetication. This repository is cloned in my own project under the name auth-server.
  - [spotify-web-api-js](https://github.com/jmperez/spotify-web-api-js): a Spotify Web API library wrapper with helper functions for Spotify's API data endpoints.
   - [react-tabs](https://github.com/reactjs/react-tabs): tab component for ReactJS.
 - [MUI](https://mui.com/): React UI library (used for grid component).
-
 
 ## Authors
 - [@sedadenboer](https://www.github.com/sedadenboer)
