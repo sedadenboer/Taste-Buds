@@ -14,10 +14,8 @@ Currently the app is not launched or available to the public since it requires a
 
 For now http//localhost:8888/callback is used as the redirect uri while running the app locally. For the authorization server and start client, npm dependencies need to be installed (`npm install`), as well as an up-to-date version of Node.js: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm.\
 
-## Tech Stack
-
+### Tech Stack
 **Client:** React
-
 **Server:** Node.js
 
 ## Screenshots
