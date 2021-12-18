@@ -16,6 +16,7 @@ For now http//localhost:8888/callback is used as the redirect uri while running 
 
 ### Tech Stack
 **Client:** React
+
 **Server:** Node.js
 
 ## Screenshots
