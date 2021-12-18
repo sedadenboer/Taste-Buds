@@ -3,6 +3,7 @@
 body {
     text-align: center;
     padding: 0;
+    margin-top: 0px;
     margin-bottom: 100px;
     max-width: 100%;
     overflow-x: hidden;
@@ -20,7 +21,6 @@ body {
     font-family: 'Lato', sans-serif;
     font-size: 18px;
     font-weight: bold;
-    color: rgb(38, 6, 18);
 }
 
 /* Styling for login page */
@@ -72,11 +72,11 @@ a.login:hover {
 
 /* Styling for logged in user pictogram and logout*/
 .user-details {
-    font-size: 12px;
+    font-size: 15px;
     font-family: 'Lato', sans-serif;
     position: relative;
     left: 450px;
-    top: 130px;
+    top: 150px;
     line-height: 2;
 }
 
@@ -84,6 +84,10 @@ a.login:hover {
     width: 60px;
     height: 60px;
     border-radius: 50%;
+}
+
+.logout {
+    font-size: 15px;
 }
 
 a.logout, a.logout:visited, a.logout:active {

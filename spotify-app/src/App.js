@@ -10,7 +10,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotifyApi = new SpotifyWebApi();
 
-// Premade function from Spotify API authorization code to retrieve a hash parameter
+// Premade hash parameter function from Spotify API (auth-server/authorization_code index.html)
 function getHashParams() {
   var hashParams = {};
   var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -22,14 +22,14 @@ function getHashParams() {
   return hashParams
 }
 
-// Merges JSON object values of the same key into an object that holds this key and an array of combined values
+// Merges JSON object values with the same key into an object that holds this key and an array of combined values
 // Source: https://stackoverflow.com/questions/47923791/merging-json-objects-with-same-key-together
 function mergeObjectValuesSameKey(dataArray) {
-  const mergedObject = dataArray.reduce((r, object) => {
-    Object.keys(object).forEach(element => {
-      r[element] = (r[element] || []).concat(object[element]);
+  const mergedObject = dataArray.reduce((acc, obj) => {
+    Object.keys(obj).forEach(element => {
+      acc[element] = (acc[element] || []).concat(obj[element]);
     })
-    return r
+    return acc
   }, {})
   return mergedObject
 }
@@ -37,19 +37,20 @@ function mergeObjectValuesSameKey(dataArray) {
 // Sorts an array based on element frequency
 // Source: https://stackoverflow.com/questions/34396767/sort-array-by-occurrence-of-its-elements
 function sortArrayByElementFrequency(array) {
-  const frequencyArray = array.reduce(function (obj, val) {
-    obj[val] = (obj[val] || 0) + 1
-    return obj
-  }, {})
-
-  const sortedFrequencyArray = Object.keys(frequencyArray).sort(function (a, b) {
-    return frequencyArray[b] - frequencyArray[a]
+  // Compute number of occurences of each item
+  const frequencyArray = Object.create(null)
+  array.forEach(item => {
+    frequencyArray[item] = (frequencyArray[item] || 0) + 1
   })
-
+  // Sort the array by comparing the counts of two items
+  const sortedFrequencyArray = Object.keys(frequencyArray).sort((x, y) => {
+    return frequencyArray[y] - frequencyArray[x]
+  })
   return sortedFrequencyArray
 }
 
-// The build of this app was inspired by the following video: https://www.youtube.com/watch?v=Xcet6msf3eE&t=2482s
+// The build of this app was inspired by the following video: 
+// https://www.youtube.com/watch?v=Xcet6msf3eE&t=2482s
 function App() {
   const params = getHashParams();
   const token = params.access_token;
@@ -62,7 +63,7 @@ function App() {
   const [summaryArtists, setSummaryArtists] = useState([])
   const [num1ArtistPhoto, setNum1ArtistPhoto] = useState('')
 
-  // Login if there is an access token
+  // Log in if there is an access token
   useEffect(() => {
     if (token) {
       spotifyApi.setAccessToken(token)
@@ -109,8 +110,9 @@ function App() {
         // Returns array with objects containing the same key 'title'
         return { title: track.name }
       })
-      // Add values of these objects to an array and update summaryTracks state
+      // Combine all objects with 'title' key into a new object with one array containing all values
       const summaryTrackNamesArray = mergeObjectValuesSameKey(summaryTrackNames)
+      // Update summaryTracks state to the combined array of track titles
       setSummaryTracks(summaryTrackNamesArray.title)
 
     }, err => {
@@ -126,7 +128,7 @@ function App() {
 
     // Retrieve user top artists data (first 30 items, short term data)
     spotifyApi.getMyTopArtists({ limit: 30, time_range: 'short_term' }).then(response => {
-      // Return wanted data for every track and update topArtists state
+      // Return wanted data for every artist and update topArtists state
       setTopArtists(response.items.map(artist => {
         return {
           name: artist.name,
@@ -139,8 +141,9 @@ function App() {
         // Returns array with objects containing the same key 'name'
         return { name: artist.name }
       })
-      // Add values of these objects to an array and update summaryArtists state
+      // Combine all objects with 'name' key into a new object with one array containing all values
       const summaryArtistNamesArray = mergeObjectValuesSameKey(summaryArtistNames)
+      // Update summaryArtists state to the combined array of artist names
       setSummaryArtists(summaryArtistNamesArray.name)
 
       // Select artist photo of #1 artist for summary artist names
@@ -167,9 +170,9 @@ function App() {
         }
       })
 
-      // Add all genres into one array and recreate new object with it
+      // Combine all objects with 'artistGenres' key into a new object with one array containing all values
       const completeGenresObject = mergeObjectValuesSameKey(genres)
-      // Take the array of genres, sort it based on genre frequency abd update topGenres state
+      // Take the array of genres, sort it based on genre frequency and update topGenres state
       const sortedGenreFrequency = sortArrayByElementFrequency(completeGenresObject.artistGenres)
       setTopGenres(sortedGenreFrequency)
 
@@ -184,26 +187,31 @@ function App() {
       {/* Login page */}
       {!loggedIn &&
         <div class='login-page'>
-          <div class='title'>Tastebuds</div>
-          <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
+          <div class='head'>
+            <div class='title'>Tastebuds</div>
+            <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
+          </div>
           <br></br>
           <br></br>
-          <p id='welcome'>Login to your Spotify account and get insights in your current music taste! </p>
+          <p id='welcome'>Log in to your Spotify account and get insights in your current music taste! </p>
           <div className='login-button'>
-            <a class='login' href='http://localhost:8888'> Login to Spotify </a>
+            <a class='login' href='http://localhost:8888'> Log in with Spotify </a>
           </div>
           <p id='author'>Made by Seda den Boer</p>
         </div>}
+
       {/* When the user is logged in */}
       {loggedIn &&
         <div class='loggedin-page'>
           <div class='user-details'>
             <img id='user-photo' src={userProfile[1]} alt='' />
             <div>Welcome, {userProfile[0]}!</div>
-            <a class='logout' href='http://localhost:3000'> Logout </a>
+            <a class='logout' href='http://localhost:3000'> Log out </a>
           </div>
-          <div class='title'>Tastebuds</div>
-          <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
+          <div class='head'>
+            <div class='title'>Tastebuds</div>
+            <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
+          </div>
           <br></br>
           <br></br>
           <Tabs>

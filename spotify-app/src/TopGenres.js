@@ -5,6 +5,7 @@ import './styles.css';
 export default function TopGenresResult({ genreList }) {
     return (
         <Grid item>
+            {/* Display the first 5 items of top genres */}
             <div class='top-genres'>
                 <h1>1. {genreList[0]}</h1>
                 <h2>2. {genreList[1]}</h2>
