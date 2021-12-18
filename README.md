@@ -1,8 +1,5 @@
 # Tastebuds
-React App for Spotify users
-
-# Tastebuds
-A React App for Spotify users.
+React App for Spotify users.
 
 ## Description
 Spotify is one of the most popular music streaming platforms. Every year users get their Spotify Wrapped, which shows them which artists, tracks and podcasts defined them that year. As music can be a great indicator of someone's personality, people often get excited to see and share their Spotify wrapped. However, music enthousiasts might want more insights and tools to analyze their listening habits all year long. 
