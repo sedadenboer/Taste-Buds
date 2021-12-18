@@ -10,12 +10,11 @@ import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotifyApi = new SpotifyWebApi();
 
-// Premade hash parameter function from Spotify API (auth-server/authorization_code index.html)
+// Premade hash parameter function from Spotify API (copied from auth-server/authorization_code index.html)
 function getHashParams() {
   var hashParams = {};
   var e, r = /([^&;=]+)=?([^&;]*)/g,
     q = window.location.hash.substring(1);
-  // eslint-disable-next-line
   while (e = r.exec(q)) {
     hashParams[e[1]] = decodeURIComponent(e[2]);
   }
@@ -49,8 +48,8 @@ function sortArrayByElementFrequency(array) {
   return sortedFrequencyArray
 }
 
-// The build of this app was inspired by the following video: 
-// https://www.youtube.com/watch?v=Xcet6msf3eE&t=2482s
+// Wrapper used to fetch metadata and user information from the Spotify API:
+// https://github.com/jmperez/spotify-web-api-js
 function App() {
   const params = getHashParams();
   const token = params.access_token;
@@ -93,7 +92,7 @@ function App() {
     if (!token) return
     if (!topTracks) return setTopTracks([])
 
-    // Retrieve user top tracks data (first 30 items, short term data)
+    // Retrieve user data for Top Tracks page (first 30 items, short term data)
     spotifyApi.getMyTopTracks({ limit: 30, time_range: 'short_term' }).then(response => {
       // Return wanted data for every track and update topTracks state
       setTopTracks(response.items.map(track => {
@@ -126,7 +125,7 @@ function App() {
     if (!token) return
     if (!topArtists) return setTopArtists([])
 
-    // Retrieve user top artists data (first 30 items, short term data)
+    // Retrieve user data for Top Artists page (first 30 items, short term data)
     spotifyApi.getMyTopArtists({ limit: 30, time_range: 'short_term' }).then(response => {
       // Return wanted data for every artist and update topArtists state
       setTopArtists(response.items.map(artist => {
@@ -155,7 +154,7 @@ function App() {
     // eslint-disable-next-line
   }, [token])
 
-  // Every artist contains a genre element
+  // Get (recent) top genres from top artists endpoint
   useEffect(() => {
     if (!token) return
     if (!topGenres) return setTopGenres([])
@@ -186,31 +185,33 @@ function App() {
     <div className="App">
       {/* Login page */}
       {!loggedIn &&
-        <div class='login-page'>
-          <div class='head'>
-            <div class='title'>Tastebuds</div>
-            <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
+        <div className='login-page'>
+          <img src="Spotify_Icon_RGB_Black.png" className='spotify-icon-login' alt="Spotify logo" width="50" height="50" />
+          <div className='head'>
+            <div className='title'>Tastebuds</div>
+            <div className='subtitle'>Explore your recent Spotify listening behaviour</div>
           </div>
           <br></br>
           <br></br>
           <p id='welcome'>Log in to your Spotify account and get insights in your current music taste! </p>
           <div className='login-button'>
-            <a class='login' href='http://localhost:8888'> Log in with Spotify </a>
+            <a className='login' href='http://localhost:8888'> Log in with Spotify </a>
           </div>
           <p id='author'>Made by Seda den Boer</p>
         </div>}
 
       {/* When the user is logged in */}
       {loggedIn &&
-        <div class='loggedin-page'>
-          <div class='user-details'>
-            <img id='user-photo' src={userProfile[1]} alt='' />
+        <div className='loggedin-page'>
+          <img src="Spotify_Icon_RGB_Black.png" className='spotify-icon' alt="Spotify logo" width="50" height="50" />
+          <div className='user-details'>
+            <img id='user-photo' src={userProfile[1]} alt='User photo' />
             <div>Welcome, {userProfile[0]}!</div>
-            <a class='logout' href='http://localhost:3000'> Log out </a>
+            <a className='logout' href='http://localhost:3000'> Log out </a>
           </div>
-          <div class='head'>
-            <div class='title'>Tastebuds</div>
-            <div class='subtitle'>Explore your recent Spotify listening behaviour</div>
+          <div className='head'>
+            <div className='title'>Tastebuds</div>
+            <div className='subtitle'>Explore your recent Spotify listening behaviour</div>
           </div>
           <br></br>
           <br></br>
@@ -227,11 +228,11 @@ function App() {
             {/* Top Tracks page */}
             <TabPanel>
               <Grid container justifyContent='center' alignItems='center' spacing={8} columns={4}>
-                {topTracks.map((track, key) => (
+                {topTracks.map((track, trackKey) => (
                   < TopTracksResult
+                    key={track.id}
                     track={track}
-                    ranking={Number(key) + 1}
-                    key={track.uri}
+                    ranking={Number(trackKey) + 1}
                   />
                 ))}
               </Grid>
@@ -239,11 +240,11 @@ function App() {
             {/* Top Artists page */}
             <TabPanel>
               <Grid container justifyContent='center' alignItems='center' spacing={8} columns={4}>
-                {topArtists.map((artist, key) => (
+                {topArtists.map((artist, artistKey) => (
                   <TopArtistsResult
+                    key={artist.id}
                     artist={artist}
-                    ranking={(Number(key) + 1)}
-                    key={artist.uri}
+                    ranking={(Number(artistKey) + 1)}
                   />
                 ))}
               </Grid>
@@ -261,7 +262,6 @@ function App() {
                 artists={summaryArtists}
                 genreList={topGenres}
                 image={num1ArtistPhoto}
-                key={summaryTracks.uri}
               />
             </TabPanel>
           </Tabs>

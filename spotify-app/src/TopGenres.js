@@ -6,7 +6,7 @@ export default function TopGenresResult({ genreList }) {
     return (
         <Grid item>
             {/* Display the first 5 items of top genres */}
-            <div class='top-genres'>
+            <div className='top-genres'>
                 <h1>1. {genreList[0]}</h1>
                 <h2>2. {genreList[1]}</h2>
                 <h2>3. {genreList[2]}</h2>
