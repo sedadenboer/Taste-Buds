@@ -12,11 +12,11 @@ Currently the app is not launched or available to the public since it requires a
 For now http//localhost:8888/callback is used as the redirect uri while running the app locally. For the authorization server and start client, npm dependencies need to be installed (`npm install`), as well as an up-to-date version of Node.js: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm.
 
 ## Screenshots
-<img src="doc/tastebuds_login.png" width="50%">
-<img src="doc/tastebuds_tracks.png" width="50%">
-<img src="doc/tastebuds_artists.png" width="50%">
-<img src="doc/tastebuds_genres.png" width="50%">
-<img src="doc/tastebuds_summary.png" width="50%">
+<img src="doc/tastebuds_login.png" width="80%">
+<img src="doc/tastebuds_tracks.png" width="80%">
+<img src="doc/tastebuds_artists.png" width="80%">
+<img src="doc/tastebuds_genres.png" width="80%">
+<img src="doc/tastebuds_summary.png" width="80%">
 
 ## Acknowledgements
 - [Spotify Web API Development Guides](https://developer.spotify.com/documentation/web-api/quick-start/) + [Spotify Web API Tutorial](https://developer.spotify.com/documentation/web-api/quick-start/): Authorization guides and API usage guides by Spotify.
