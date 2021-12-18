@@ -83,7 +83,7 @@ function App() {
     }, err => {
       console.error(err)
     })
-    // the following and other Hook useEffect dependency errors can be ignored to prevent too many server requests
+    // The following and other Hook useEffect dependency errors can be ignored to prevent too many server requests
     // eslint-disable-next-line 
   }, [token])
 
