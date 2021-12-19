@@ -10,7 +10,7 @@ Tastebuds is a simple browser app that displays the user's top Spotify tracks, a
 For this app, the user needs a Spotify Premium account. When logging in, the user is asked to give a one-time authorization for several scopes. After logging in, the user will be directed to the main page where the user can look at different pages where their Spotify data is displayed. When logging out, the user is redirected to the login page.
 
 ### Availability
-Currently the app is not launched or available to the public since it requires a user credentials, but this might change in the future. Updates about this will be announced here.
+Currently the app is not launched or available to the public since I have not hosted and deployed it. Running it locally requires user credentials. However, this might change in the future. Updates about this will be announced here.
 
 For now http//localhost:8888/callback is used as the redirect uri while running the app locally. For the authorization server and start client, npm dependencies need to be installed (`npm install`), as well as an up-to-date version of Node.js: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm.\
 
