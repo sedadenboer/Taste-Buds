@@ -27,6 +27,7 @@ For now http//localhost:8888/callback is used as the redirect uri while running 
 <img src="doc/tastebuds_summary.png" width="80%">
 
 ## Acknowledgements
+- Spotify ©
 - [Spotify Web API Development Guides](https://developer.spotify.com/documentation/web-api/quick-start/) + [Spotify Web API Tutorial](https://developer.spotify.com/documentation/web-api/quick-start/): Authorization guides and API usage guides by Spotify.
  - [Spotify Accounts Authentication Examples](https://github.com/spotify/web-api-auth-examples): a repository containing source code for setting up a Node.js based server with OAuth 2.0 flows for Spotify Web API authetication. This repository is cloned in my own project under the name auth-server.
  - [spotify-web-api-js](https://github.com/jmperez/spotify-web-api-js): a Spotify Web API library wrapper with helper functions for Spotify's API data endpoints.
