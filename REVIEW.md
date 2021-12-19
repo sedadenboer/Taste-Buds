@@ -33,7 +33,7 @@ The initial goal of this project was to create an app for Spotify users so that 
 
 Below is a sketch of two of the features I listed above:
 
-<img src="doc/review_suggestion2.png">
+<img src="doc/review_suggestion2.jpg">
 
 Essentially, the idea is to create more tabs with different features. 
 
@@ -43,4 +43,4 @@ For now the app can only be accessed locally with the client credentials I recei
 ### About page, privacy statement and delete account
 Crucial parts of app's for which user login is required, especially with authorization, is a privacy statement and the option to remove your account. This way the user knows what their data will be used for and the user can always remove authorization. An about page could also be very informative. Things that could be included here are: author information, goal of the app, FAQ, credits, etc. 
 
-<img src="doc/review_suggestion1.png">
+<img src="doc/review_suggestion1.jpg">
