@@ -18,7 +18,7 @@ In Firefox the color of the audio player cannot be adjusted, so its default colo
 
 * **Do more with errors**
 
-Errors are only displayed in the console. Some errors can be useful to be displayed to the user. For example, if the login session is expired (authorization) you get a 401 error in the console and the user will see the main but without their content. When this happens the user should be redirected to the login page, possibly with a message that the session is expired.
+Errors are only displayed in the console. Some errors can be useful to be displayed to the user. For example, if the login session is expired (authorization) you get a 401 error in the console and the user will see the main but without their content. When this happens the user should be redirected to the login page, possibly with a message that the session is expired. Also when the user cancels the authorization request, the user sees a blank page with a token error in the url. It would be better when the user cancels this request the user will be redirected to the login page.
 
 * **Commenting**
 
