@@ -26,6 +26,9 @@ For now http//localhost:8888/callback is used as the redirect uri while running 
 <img src="doc/tastebuds_genres.png" width="80%">
 <img src="doc/tastebuds_summary.png" width="80%">
 
+## Screencast
+[Tastebuds demo](https://www.youtube.com/watch?v=1h0kzP5PA0k)
+
 ## Acknowledgements
 - Spotify ©
 - [Spotify Web API Development Guides](https://developer.spotify.com/documentation/web-api/quick-start/) + [Spotify Web API Tutorial](https://developer.spotify.com/documentation/web-api/quick-start/): Authorization guides and API usage guides by Spotify.
