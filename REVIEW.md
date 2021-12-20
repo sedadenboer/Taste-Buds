@@ -28,6 +28,10 @@ Now the comments are very long since I wanted to make really clear what the code
 
 To make the code more compact and efficient it is key to automise the code as much as possible. This can be improved for the displayal of top genres. Now the top genres are put in an array and the individual genres are accessed one by one. This could also be done by a loop for example.
 
+* **Audio player**
+
+When you click on a 30 second audio preview and then click on another one, they both play at the same time. It would be nicer if you click on another preview that the other one stops playing.
+
 * **Follow React.js style guidelines**
 
 ### More features with regards to the goal of the app
